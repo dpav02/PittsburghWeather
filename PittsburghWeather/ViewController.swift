@@ -10,16 +10,30 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var dayOfWeekLbl: UILabel!
+    
+    @IBOutlet weak var todayHighTempLbl: UILabel!
+    @IBOutlet weak var todayLowTempLbl: UILabel!
+    
+    @IBOutlet weak var todaySunriseTimeLbl: UILabel!
+    @IBOutlet weak var todaySunsetTimeLbl: UILabel!
+    
+    var weather = Weather.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        loadWeather()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func loadWeather() {
+        
+        weather.downloadWeatherDetails {
+            self.dayOfWeekLbl.text = self.weather.todayName
+            self.todayHighTempLbl.text = self.weather.todayHighTemp
+            self.todayLowTempLbl.text = self.weather.todayLowTemp
+            self.todaySunriseTimeLbl.text = self.weather.todaySunriseTime
+            self.todaySunsetTimeLbl.text = self.weather.todaySunsetTime
+        }
     }
-
-
 }
-
